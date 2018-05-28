@@ -1,7 +1,7 @@
 #include <iostream>
 #include "ECS/Entity.h"
 #include "properties/Position.h"
-#include "MoveCommand.h"
+#include "commands/MoveCommand.h"
 
 int main() {
     auto *player = new Entity();

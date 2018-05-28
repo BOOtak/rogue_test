@@ -3,7 +3,7 @@
 //
 
 #include "MoveCommand.h"
-#include "properties/Position.h"
+#include "../properties/Position.h"
 
 MoveCommand::MoveCommand(int x, int y, Entity *entity) : x(x), y(y), entity(entity) {}
 

@@ -6,8 +6,8 @@
 #define ROUGETEST_MOVECOMMAND_H
 
 
-#include "ECS/Command.h"
-#include "ECS/Entity.h"
+#include "../ECS/Command.h"
+#include "../ECS/Entity.h"
 
 class MoveCommand : public Command {
 public:
