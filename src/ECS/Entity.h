@@ -6,34 +6,27 @@
 #define ROUGETEST_ENTITY_H
 
 
-#include <vector>
+#include <map>
 #include "Property.h"
 
 class Entity {
 private:
-    std::vector<const BaseProperty*> properties;
+    std::map<int, const BaseProperty*> properties;
 public:
     template <class PDC, class ...Args> void addProperty(Args ... args) {
-        properties.push_back(new Property<PDC>(args...));
+        properties.insert(std::make_pair(BaseProperty::getPropertyType<PDC>(), new Property<PDC>(args...)));
     }
 
     template <class PDC>
     bool hasProperty() {
-        for (auto prop : properties) {
-            if (prop->getType() == BaseProperty::getPropertyType<PDC>()) {
-                return true;
-            }
-        }
-
-        return false;
+        return properties.find(BaseProperty::getPropertyType<PDC>()) != properties.end();
     }
 
     template <class PDC>
     const Property<PDC>* getProperty() {
-        for (auto prop : properties) {
-            if (prop->getType() == BaseProperty::getPropertyType<PDC>()) {
-                return dynamic_cast<const Property<PDC> *>(prop);
-            }
+        auto it = properties.find(BaseProperty::getPropertyType<PDC>());
+        if (it != properties.end()) {
+            return dynamic_cast<const Property<PDC> *>(it->second);
         }
     }
 };
