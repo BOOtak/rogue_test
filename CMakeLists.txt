@@ -11,4 +11,6 @@ add_executable(rougetest
         src/commands/MoveCommand.cpp
         src/ECS/World.cpp
         src/ECS/EntityManager.cpp
+        src/entities/Player.cpp
+        src/entities/Mob.cpp
         )
