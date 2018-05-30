@@ -1,2 +1,2 @@
 # rouge_test
-Magnificient adventure into the deeps of C++ and rougelike-like game development
+Magnificient adventure into the deeps of C++ and roguelike-like game development
