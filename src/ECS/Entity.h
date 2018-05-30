@@ -13,6 +13,8 @@ class Entity {
 private:
     std::map<int, const BaseProperty*> properties;
 public:
+    ~Entity();
+
     template <class PDC, class ...Args> void addProperty(Args ... args) {
         properties.insert(std::make_pair(BaseProperty::getPropertyType<PDC>(), new Property<PDC>(args...)));
     }

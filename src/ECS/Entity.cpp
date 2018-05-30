@@ -4,3 +4,8 @@
 
 #include "Entity.h"
 
+Entity::~Entity() {
+    for (auto property : properties) {
+        delete(property.second);
+    }
+}
