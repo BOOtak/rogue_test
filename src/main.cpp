@@ -6,6 +6,8 @@
 #include "ECS/World.h"
 #include "entities/Player.h"
 #include "entities/Mob.h"
+#include "ECS/EventBus.h"
+#include "systems/PingSystem.h"
 
 int main() {
     std::unique_ptr<World> world(new World());
@@ -31,6 +33,25 @@ int main() {
         Position *pos = e->getProperty<Position>()->getValue();
         std::cout << pos->x_ << " " << pos->y_ << std::endl;
     }
+
+    auto *eventBus = new EventBus();
+    auto *pingSystem = new PingSystem(em, eventBus);
+    auto *pongSystem = new PongSystem(em, eventBus);
+
+    eventBus->registerListener(pingSystem);
+    eventBus->registerListener(pongSystem);
+
+    eventBus->sendEvent<PingEvent>();
+    eventBus->update();
+    eventBus->update();
+    eventBus->update();
+    eventBus->update();
+    eventBus->update();
+
+    eventBus->unregisterListener(pingSystem);
+    eventBus->unregisterListener(pongSystem);
+    eventBus->update();
+    eventBus->update();
 
     return 0;
 }

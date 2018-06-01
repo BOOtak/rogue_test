@@ -26,6 +26,8 @@ public:
         value = new PDC(args...);
     }
 
+    ~Property();
+
     PDC *getValue() const {
         return value;
     }
@@ -44,6 +46,11 @@ private:
         return type();
     }
 };
+
+template<class PDC>
+Property<PDC>::~Property() {
+    delete (value);
+}
 
 template<class PDC>
 int BaseProperty::getPropertyType() {

@@ -13,4 +13,10 @@ add_executable(rougetest
         src/ECS/EntityManager.cpp
         src/entities/Player.cpp
         src/entities/Mob.cpp
+        src/ECS/Event.cpp
+        src/ECS/EventListener.cpp
+        src/ECS/System.cpp
+        src/ECS/EventBus.cpp
+        src/events/PingEvent.h
+        src/systems/PingSystem.cpp
         )

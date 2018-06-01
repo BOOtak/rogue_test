@@ -8,11 +8,13 @@
 
 #include "../ECS/Entity.h"
 #include "../properties/Position.h"
+#include "../properties/PlayerControllable.h"
 
 class Player : public Entity {
 public:
     Player(int x, int y) {
         addProperty<Position>(x, y);
+        addProperty<PlayerControllable>();
     }
 };
 
