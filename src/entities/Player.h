@@ -6,7 +6,7 @@
 #define ROUGETEST_PLAYER_H
 
 
-#include "../ECS/Entity.h"
+#include "../ECS/include/Entity.h"
 #include "../properties/Position.h"
 #include "../properties/PlayerControllable.h"
 

@@ -7,9 +7,9 @@
 
 
 #include <iostream>
-#include "../ECS/EventListener.h"
+#include "../ECS/include/EventListener.h"
 #include "../events/PingEvent.h"
-#include "../ECS/System.h"
+#include "../ECS/include/System.h"
 
 class PingSystem : public System, public EventListener<PingEvent> {
 public:

@@ -1,12 +1,12 @@
 #include <iostream>
 #include <bits/unique_ptr.h>
-#include "ECS/Entity.h"
+#include "ECS/include/Entity.h"
 #include "properties/Position.h"
 #include "commands/MoveCommand.h"
-#include "ECS/World.h"
+#include "ECS/include/World.h"
 #include "entities/Player.h"
 #include "entities/Mob.h"
-#include "ECS/EventBus.h"
+#include "ECS/include/EventBus.h"
 #include "systems/PingSystem.h"
 
 int main() {
