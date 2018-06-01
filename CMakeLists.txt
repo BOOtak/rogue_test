@@ -3,20 +3,15 @@ project(rougetest)
 
 set(CMAKE_CXX_STANDARD 17)
 
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/src/ECS")
+
 add_executable(rougetest
         src/main.cpp
-        src/ECS/Entity.cpp
-        src/ECS/Property.cpp
-        src/ECS/Command.cpp
         src/commands/MoveCommand.cpp
-        src/ECS/World.cpp
-        src/ECS/EntityManager.cpp
         src/entities/Player.cpp
         src/entities/Mob.cpp
-        src/ECS/Event.cpp
-        src/ECS/EventListener.cpp
-        src/ECS/System.cpp
-        src/ECS/EventBus.cpp
         src/events/PingEvent.h
         src/systems/PingSystem.cpp
         )
+
+target_link_libraries(rougetest PUBLIC ecs)

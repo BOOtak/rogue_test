@@ -6,7 +6,7 @@
 #define ROUGETEST_MOB_H
 
 
-#include "../ECS/include/Entity.h"
+#include <Entity.h>
 #include "../properties/Position.h"
 
 class Mob : public Entity {

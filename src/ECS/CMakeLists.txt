@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.11)
+project(rougetest)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_library(ecs STATIC
+        Command.cpp
+        Entity.cpp
+        EntityManager.cpp
+        Event.cpp
+        EventBus.cpp
+        EventListener.cpp
+        Property.cpp
+        System.cpp
+        World.cpp
+        include/Command.h
+        include/Entity.h
+        include/EntityManager.h
+        include/Event.h
+        include/EventBus.h
+        include/EventListener.h
+        include/Property.h
+        include/System.h
+        include/World.h
+        )
+
+target_include_directories(ecs PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+        )
