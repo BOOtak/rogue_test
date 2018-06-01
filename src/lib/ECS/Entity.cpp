@@ -2,7 +2,7 @@
 // Created by kirill on 23.05.18.
 //
 
-#include "include/Entity.h"
+#include "Entity.h"
 
 Entity::~Entity() {
     for (auto property : properties) {
