@@ -4,4 +4,8 @@
 
 #include "System.h"
 
-System::System(EntityManager *em_, EventBus *eventBus_) : em(em_), eventBus(eventBus_) {}
+System::System(World *world_) : world(world_) {}
+
+World *System::getWorld() const {
+    return world;
+}

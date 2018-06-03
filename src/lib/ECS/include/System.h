@@ -10,25 +10,22 @@
 #include "Entity.h"
 #include "EntityManager.h"
 #include "EventBus.h"
+#include "World.h"
 
 class System {
-public:
-    explicit System(EntityManager *em_, EventBus *eventBus_);
-
 protected:
-    EntityManager *getEm() {
-        return em;
-    }
-
-    EventBus* getEventBus() {
-        return eventBus;
-    }
+    explicit System(World *world);
 
     virtual void update() = 0;
 
+    friend class World;
+
 private:
-    EntityManager *em;
-    EventBus *eventBus;
+
+    World *world;
+public:
+    World *getWorld() const;
+
 };
 
 

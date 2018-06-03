@@ -4,14 +4,14 @@
 
 #include "PingSystem.h"
 
-PingSystem::PingSystem(EntityManager *em_, EventBus *eventBus_) : System(em_, eventBus_) {}
-
 void PingSystem::update() {
 
 }
 
-PongSystem::PongSystem(EntityManager *em_, EventBus *eventBus_) : System(em_, eventBus_) {}
+PingSystem::PingSystem(World *world) : System(world) {}
 
 void PongSystem::update() {
 
 }
+
+PongSystem::PongSystem(World *world) : System(world) {}

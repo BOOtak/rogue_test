@@ -12,11 +12,11 @@
 
 class PingSystem : public System, public EventListener<PingEvent> {
 public:
-    PingSystem(EntityManager *em_, EventBus *eventBus_);
+    explicit PingSystem(World *world);
 
     void onEvent(Event<PingEvent> *event) override {
         std::cout << "Got ping!" << std::endl;
-        getEventBus()->sendEvent<PongEvent>();
+        getWorld()->getEventBus()->sendEvent<PongEvent>();
     }
 
 protected:
@@ -25,11 +25,11 @@ protected:
 
 class PongSystem : public System, public EventListener<PongEvent> {
 public:
-    PongSystem(EntityManager *em_, EventBus *eventBus_);
+    explicit PongSystem(World *world);
 
     void onEvent(Event<PongEvent> *event) override {
         std::cout << "Got pong!" << std::endl;
-        getEventBus()->sendEvent<PingEvent>();
+        getWorld()->getEventBus()->sendEvent<PingEvent>();
     }
 
 protected:

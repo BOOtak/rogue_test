@@ -7,6 +7,10 @@
 
 
 #include "EntityManager.h"
+#include "EventBus.h"
+
+// forward declaration
+class System;
 
 class World {
 public:
@@ -14,13 +18,25 @@ public:
 
     ~World();
 
-    EntityManager *getEntityManager() {
-        return _entityManager;
+    template<class T, class ... Args>
+    T* addSystem(Args... args) {
+        T* system = new T(this, args...);
+        systems.push_back(system);
+        return system;
     }
 
-private:
-    EntityManager *_entityManager;
-};
+    EntityManager *getEntityManager() const;
 
+    EventBus *getEventBus() const;
+
+    void update();
+
+private:
+    EntityManager *entityManager;
+
+    EventBus *eventBus;
+
+    std::vector<System *> systems;
+};
 
 #endif //ROUGETEST_WORLD_H
