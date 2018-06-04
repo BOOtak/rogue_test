@@ -19,8 +19,8 @@ public:
     ~World();
 
     template<class T, class ... Args>
-    T* addSystem(Args... args) {
-        T* system = new T(this, args...);
+    T *addSystem(Args... args) {
+        auto *system = new T(this, args...);
         systems.push_back(system);
         return system;
     }
