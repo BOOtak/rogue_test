@@ -23,6 +23,10 @@ public:
         eventQueue.push(new Event<PDC>(args...));
     }
 
+    void sendEvent(BaseEvent *event) {
+        eventQueue.push(event);
+    }
+
     void update();
 
 private:

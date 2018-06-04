@@ -4,7 +4,6 @@ project(rougetest)
 set(CMAKE_CXX_STANDARD 17)
 
 add_library(ecs STATIC
-        Command.cpp
         Entity.cpp
         EntityManager.cpp
         Event.cpp
@@ -13,7 +12,6 @@ add_library(ecs STATIC
         Property.cpp
         System.cpp
         World.cpp
-        include/Command.h
         include/Entity.h
         include/EntityManager.h
         include/Event.h
