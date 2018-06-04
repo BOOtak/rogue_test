@@ -31,8 +31,8 @@ int main() {
 
     auto *is = world->addSystem<InputSystem>();
     auto *ms = world->addSystem<MoveSystem>();
-    world->getEventBus()->registerListener(is);
-    world->getEventBus()->registerListener(ms);
+    world->getEventBus()->registerListener<InputEvent, InputSystem>(is, &InputSystem::onInputEvent);
+    world->getEventBus()->registerListener<PlayerMoveEvent, MoveSystem>(ms, &MoveSystem::onPlayerMoveEvent);
 
     world->getEventBus()->sendEvent<InputEvent>(KEY_DOWN, true);
     world->getEventBus()->sendEvent<InputEvent>(KEY_DOWN, true);

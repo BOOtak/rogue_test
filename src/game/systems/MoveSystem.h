@@ -9,15 +9,15 @@
 #include <System.h>
 #include "../events/PlayerMoveEvent.h"
 
-class MoveSystem : public System, public EventListener<PlayerMoveEvent> {
+class MoveSystem : public System, public EventListener {
 public:
-    MoveSystem(World *world);
+    explicit MoveSystem(World *world);
 
     void update() override;
 
-protected:
-    void onEvent(Event<PlayerMoveEvent> *event) override;
+    void onPlayerMoveEvent(PlayerMoveEvent *event);
 
+private:
     std::pair<int, int> getCoordsIncrement(PlayerMoveEvent *event);
 };
 

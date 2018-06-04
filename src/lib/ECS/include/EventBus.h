@@ -9,14 +9,42 @@
 #include <vector>
 #include <queue>
 #include <map>
-#include "EventListener.h"
+#include <algorithm>
 #include "Event.h"
+#include "EventDelegate.h"
+
+typedef void (*EventCallback)(BaseEvent *);
 
 class EventBus {
 public:
-    void registerListener(BaseEventListener *listener);
+    template<class TEvent, class TListener>
+    void registerListener(TListener *listener, void(TListener::*callback)(TEvent *event)) {
+        EventType type = BaseEvent::getEventType<TEvent>();
+        if (listenerMap.find(type) == listenerMap.end()) {
+            listenerMap.insert(std::make_pair(type, std::vector<BaseEventDelegate *>()));
+        }
 
-    void unregisterListener(BaseEventListener *listener);
+        listenerMap.at(type).push_back(new EventDelegate<TListener, TEvent>(listener, callback));
+    }
+
+    template<class TEvent, class TListener>
+    void unregisterListener(TListener *listener) {
+        EventType type = BaseEvent::getEventType<TEvent>();
+        if (listenerMap.find(type) == listenerMap.end()) {
+            std::cout << "no listener of type " << type << std::endl;
+            return;
+        }
+
+        auto &delegatesOfType = listenerMap.at(type);
+        auto newDelegates = std::remove_if(delegatesOfType.begin(), delegatesOfType.end(), [&](BaseEventDelegate *delegate) -> bool {
+            bool res = delegate->getListener() == listener;
+            if (res) {
+                std::cout << "Unregister listener of type " << type << std::endl;
+            }
+            return res;
+        });
+        delegatesOfType.resize(static_cast<unsigned long>(newDelegates - delegatesOfType.begin()));
+    }
 
     template<class PDC, class ... Args>
     void sendEvent(Args ... args) {
@@ -30,7 +58,7 @@ public:
     void update();
 
 private:
-    std::map<EventType, std::vector<BaseEventListener *>> listenerMap;
+    std::map<EventType, std::vector<BaseEventDelegate *>> listenerMap;
     std::queue<BaseEvent *> eventQueue;
 };
 

@@ -12,12 +12,12 @@ void MoveSystem::update() {
 
 }
 
-void MoveSystem::onEvent(Event<PlayerMoveEvent> *event) {
+void MoveSystem::onPlayerMoveEvent(PlayerMoveEvent *event) {
     std::vector<Entity *> controllables = getWorld()->getEntityManager()->getEntitiesWithProperty<PlayerControllable>();
     for (auto c : controllables) {
         // TODO: calculate distance depending on other entity properties (e.g stats, wear etc)
 
-        std::pair<int, int> coordsIncrement = getCoordsIncrement(event->value());
+        std::pair<int, int> coordsIncrement = getCoordsIncrement(event);
 
         if (c->hasProperty<Position>()) {
             auto val = c->getProperty<Position>()->getValue();

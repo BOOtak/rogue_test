@@ -6,12 +6,11 @@
 #define ROUGETEST_INPUTSYSTEM_H
 
 
-#include <EventListener.h>
 #include <System.h>
 #include "../events/InputEvent.h"
 #include "../events/PlayerMoveEvent.h"
 
-class InputSystem : public System, public EventListener<InputEvent> {
+class InputSystem : public System, public EventListener {
 protected:
 public:
 
@@ -19,15 +18,18 @@ protected:
 public:
     explicit InputSystem(World *world);
 
-protected:
-    void onEvent(Event<InputEvent> *event) override;
+    void onInputEvent(InputEvent* event);
 
-    Event<PlayerMoveEvent> * getPlayerControlEvent(Event<InputEvent> *inputEvent);
+protected:
+    Event<PlayerMoveEvent> *getPlayerControlEvent(InputEvent *inputEvent);
 
     void update() override;
 
 private:
-    const std::map<KeyCode, MoveType> inputMap = {{KEY_UP, MOVE_UP}, {KEY_DOWN, MOVE_DOWN}, {KEY_LEFT, MOVE_LEFT}, {KEY_RIGHT, MOVE_RIGHT}};
+    const std::map<KeyCode, MoveType> inputMap = {{KEY_UP,    MOVE_UP},
+                                                  {KEY_DOWN,  MOVE_DOWN},
+                                                  {KEY_LEFT,  MOVE_LEFT},
+                                                  {KEY_RIGHT, MOVE_RIGHT}};
 };
 
 

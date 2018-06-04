@@ -6,20 +6,12 @@
 
 InputSystem::InputSystem(World *world) : System(world) {}
 
-void InputSystem::onEvent(Event<InputEvent> *event) {
-    Event<PlayerMoveEvent> *controlEvent = getPlayerControlEvent(event);
-    if (controlEvent != nullptr) {
-        getWorld()->getEventBus()->sendEvent(controlEvent);
-    }
-}
-
-Event<PlayerMoveEvent> *InputSystem::getPlayerControlEvent(Event<InputEvent> *inputEvent) {
-    InputEvent* val = inputEvent->value();
-    if (!val->isPressed) {
+Event<PlayerMoveEvent> *InputSystem::getPlayerControlEvent(InputEvent *inputEvent) {
+    if (!inputEvent->isPressed) {
         return nullptr;
     }
 
-    auto type = inputMap.find(val->keyCode);
+    auto type = inputMap.find(inputEvent->keyCode);
     if (type != inputMap.end()) {
         return new Event<PlayerMoveEvent>(type->second);
     }
@@ -27,4 +19,11 @@ Event<PlayerMoveEvent> *InputSystem::getPlayerControlEvent(Event<InputEvent> *in
 
 void InputSystem::update() {
 
+}
+
+void InputSystem::onInputEvent(InputEvent *event) {
+    Event<PlayerMoveEvent> *controlEvent = getPlayerControlEvent(event);
+    if (controlEvent != nullptr) {
+        getWorld()->getEventBus()->sendEvent(controlEvent);
+    }
 }

@@ -10,11 +10,11 @@
 #include <System.h>
 #include "../events/PingEvent.h"
 
-class PingSystem : public System, public EventListener<PingEvent> {
+class PingSystem : public System, public EventListener {
 public:
     explicit PingSystem(World *world);
 
-    void onEvent(Event<PingEvent> *event) override {
+    void onPing(PingEvent *event) {
         std::cout << "Got ping!" << std::endl;
         getWorld()->getEventBus()->sendEvent<PongEvent>();
     }
@@ -23,11 +23,11 @@ protected:
     void update() override;
 };
 
-class PongSystem : public System, public EventListener<PongEvent> {
+class PongSystem : public System, public EventListener {
 public:
     explicit PongSystem(World *world);
 
-    void onEvent(Event<PongEvent> *event) override {
+    void onPong(PongEvent *event) {
         std::cout << "Got pong!" << std::endl;
         getWorld()->getEventBus()->sendEvent<PingEvent>();
     }

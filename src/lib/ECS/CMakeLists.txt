@@ -8,7 +8,6 @@ add_library(ecs STATIC
         EntityManager.cpp
         Event.cpp
         EventBus.cpp
-        EventListener.cpp
         Property.cpp
         System.cpp
         World.cpp
@@ -16,11 +15,12 @@ add_library(ecs STATIC
         include/EntityManager.h
         include/Event.h
         include/EventBus.h
-        include/EventListener.h
         include/Property.h
         include/System.h
         include/World.h
-        )
+        EventDelegate.cpp
+        include/EventDelegate.h
+        include/BaseEventDelegate.h include/EventListener.h)
 
 target_include_directories(ecs PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
