@@ -3,7 +3,6 @@ add_executable(roguetest
         entities/Player.cpp
         entities/Mob.cpp
         events/PingEvent.h
-        systems/PingSystem.cpp
         systems/InputSystem.cpp
         systems/InputSystem.h
         events/InputEvent.h

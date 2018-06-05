@@ -6,7 +6,6 @@
 #include "properties/Position.h"
 #include "entities/Player.h"
 #include "entities/Mob.h"
-#include "systems/PingSystem.h"
 #include "systems/InputSystem.h"
 #include "systems/MoveSystem.h"
 
