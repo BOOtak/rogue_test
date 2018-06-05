@@ -1,4 +1,4 @@
-add_executable(rougetest
+add_executable(roguetest
         main.cpp
         entities/Player.cpp
         entities/Mob.cpp
@@ -11,4 +11,4 @@ add_executable(rougetest
         systems/MoveSystem.cpp
         systems/MoveSystem.h)
 
-target_link_libraries(rougetest PUBLIC ecs)
+target_link_libraries(roguetest PUBLIC ecs)
