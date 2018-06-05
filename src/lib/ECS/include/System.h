@@ -16,7 +16,11 @@ class System {
 protected:
     explicit System(World *world);
 
+    virtual void prepare() = 0;
+
     virtual void update() = 0;
+
+    virtual void finalize() = 0;
 
     friend class World;
 
@@ -25,7 +29,6 @@ private:
     World *world;
 public:
     World *getWorld() const;
-
 };
 
 

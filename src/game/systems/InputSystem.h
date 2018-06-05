@@ -25,6 +25,10 @@ protected:
 
     void update() override;
 
+    void prepare() override;
+
+    void finalize() override;
+
 private:
     const std::map<KeyCode, MoveType> inputMap = {{KEY_UP,    MOVE_UP},
                                                   {KEY_DOWN,  MOVE_DOWN},

@@ -6,6 +6,12 @@
 
 InputSystem::InputSystem(World *world) : System(world) {}
 
+void InputSystem::prepare() {
+}
+
+void InputSystem::finalize() {
+}
+
 Event<PlayerMoveEvent> *InputSystem::getPlayerControlEvent(InputEvent *inputEvent) {
     if (!inputEvent->isPressed) {
         return nullptr;

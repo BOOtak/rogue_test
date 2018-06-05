@@ -13,6 +13,13 @@ class MoveSystem : public System, public EventListener {
 public:
     explicit MoveSystem(World *world);
 
+protected:
+    void prepare() override;
+
+    void finalize() override;
+
+public:
+
     void update() override;
 
     void onPlayerMoveEvent(PlayerMoveEvent *event);

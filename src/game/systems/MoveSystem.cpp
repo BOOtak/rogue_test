@@ -42,3 +42,11 @@ std::pair<int, int> MoveSystem::getCoordsIncrement(PlayerMoveEvent *event) {
             return std::make_pair(0, 0);
     }
 }
+
+void MoveSystem::prepare() {
+
+}
+
+void MoveSystem::finalize() {
+
+}

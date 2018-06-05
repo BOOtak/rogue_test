@@ -13,6 +13,10 @@ World::World() {
 World::~World() {
     delete (entityManager);
     delete (eventBus);
+    for (auto system : systems) {
+        system->finalize();
+        delete(system);
+    }
 }
 
 EventBus *World::getEventBus() const {
@@ -29,4 +33,8 @@ void World::update() {
         // TODO: figure out whether it is better to update event bus after processing all systems.
         eventBus->update();
     }
+}
+
+void World::prepareSystem(System *system) {
+    system->prepare();
 }
