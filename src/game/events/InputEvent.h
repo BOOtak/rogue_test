@@ -5,15 +5,12 @@
 #ifndef ROUGETEST_INPUTEVENT_H
 #define ROUGETEST_INPUTEVENT_H
 
-typedef bool KeyState;
-
 typedef int KeyCode;
 
 struct InputEvent {
-    InputEvent(KeyCode keyCode, KeyState isPressed) : isPressed(isPressed), keyCode(keyCode) {}
+    explicit InputEvent(KeyCode keyCode) : keyCode(keyCode) {}
 
     KeyCode keyCode;
-    KeyState isPressed;
 };
 
 #endif //ROUGETEST_INPUTEVENT_H

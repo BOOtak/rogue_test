@@ -3,8 +3,11 @@
 //
 
 #include <curses.h>
+#include <sstream>
 #include "RenderSystem.h"
 #include "../properties/Position.h"
+
+#define CURSOR_INVISIBLE 0
 
 RenderSystem::RenderSystem(World *world) : System(world) {}
 
@@ -20,7 +23,6 @@ void RenderSystem::update() {
             draw(position->x_, position->y_, texture);
         } else {
             // TODO: add logging already, will ya?
-            std::cout << "out of view" << std::endl;
         }
     }
     refresh();
@@ -29,10 +31,9 @@ void RenderSystem::update() {
 void RenderSystem::prepare() {
     std::cout << "RenderSystem::prepare()" << std::endl;
     initscr();
+    curs_set(CURSOR_INVISIBLE);
     cbreak();
     noecho();
-    keypad(stdscr, true);
-    nodelay(stdscr, true);
     mvaddstr(0, 1, "Hi there!");
 }
 
@@ -53,4 +54,7 @@ void RenderSystem::blankFill() {
             mvaddch(y, x, '.');
         }
     }
+    std::stringstream dimens;
+    dimens << "(" << width << ";" << height << ")";
+    mvaddstr(0, 0, dimens.str().c_str());
 }

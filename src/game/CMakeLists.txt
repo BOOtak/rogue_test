@@ -16,7 +16,9 @@ add_executable(roguetest
         systems/MoveSystem.h
         systems/RenderSystem.cpp
         systems/RenderSystem.h
-        properties/CharTexture.h)
+        properties/CharTexture.h
+        systems/CursesRawInputSystem.cpp
+        systems/CursesRawInputSystem.h)
 
 target_include_directories(roguetest PRIVATE ${CURSES_INCLUDE_DIRS})
 target_link_libraries(roguetest PUBLIC ecs ${CURSES_LIBRARIES})

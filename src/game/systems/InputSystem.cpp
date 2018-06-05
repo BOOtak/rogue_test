@@ -13,10 +13,6 @@ void InputSystem::finalize() {
 }
 
 Event<PlayerMoveEvent> *InputSystem::getPlayerControlEvent(InputEvent *inputEvent) {
-    if (!inputEvent->isPressed) {
-        return nullptr;
-    }
-
     auto type = inputMap.find(inputEvent->keyCode);
     if (type != inputMap.end()) {
         return new Event<PlayerMoveEvent>(type->second);
