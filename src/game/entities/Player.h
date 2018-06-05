@@ -9,12 +9,14 @@
 #include <Entity.h>
 #include "../properties/Position.h"
 #include "../properties/PlayerControllable.h"
+#include "../properties/CharTexture.h"
 
 class Player : public Entity {
 public:
     Player(int x, int y) {
         addProperty<Position>(x, y);
         addProperty<PlayerControllable>();
+        addProperty<CharTexture>('@', 0);
     }
 };
 

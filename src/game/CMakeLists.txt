@@ -8,6 +8,9 @@ add_executable(roguetest
         events/InputEvent.h
         events/PlayerMoveEvent.h
         systems/MoveSystem.cpp
-        systems/MoveSystem.h)
+        systems/MoveSystem.h
+        systems/RenderSystem.cpp
+        systems/RenderSystem.h
+        properties/CharTexture.h)
 
 target_link_libraries(roguetest PUBLIC ecs)

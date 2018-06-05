@@ -7,12 +7,7 @@
 
 typedef bool KeyState;
 
-enum KeyCode {
-    KEY_UP,
-    KEY_DOWN,
-    KEY_LEFT,
-    KEY_RIGHT
-};
+typedef int KeyCode;
 
 struct InputEvent {
     InputEvent(KeyCode keyCode, KeyState isPressed) : isPressed(isPressed), keyCode(keyCode) {}

@@ -8,6 +8,7 @@
 #include "entities/Mob.h"
 #include "systems/InputSystem.h"
 #include "systems/MoveSystem.h"
+#include "systems/RenderSystem.h"
 
 static const int FPS = 1;
 static const int64_t SLEEP_INTERVAL_US = 1000 * 1000 / FPS;  // microseconds
@@ -30,6 +31,7 @@ int main() {
 
     auto *is = world->addSystem<InputSystem>();
     auto *ms = world->addSystem<MoveSystem>();
+    world->addSystem<RenderSystem>();
     world->getEventBus()->registerListener<InputEvent, InputSystem>(is, &InputSystem::onInputEvent);
     world->getEventBus()->registerListener<PlayerMoveEvent, MoveSystem>(ms, &MoveSystem::onPlayerMoveEvent);
 

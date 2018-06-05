@@ -6,8 +6,6 @@
 #include <EventBus.h>
 
 void EventBus::update() {
-    std::cout << __FUNCTION__ << std::endl;
-
     // Protect from invoke() { sendEvent(); } loop.
     unsigned long queueSize = eventQueue.size();
 

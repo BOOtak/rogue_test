@@ -7,6 +7,7 @@
 
 
 #include <System.h>
+#include <ncurses/curses.h>
 #include "../events/InputEvent.h"
 #include "../events/PlayerMoveEvent.h"
 
