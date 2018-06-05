@@ -5,7 +5,7 @@
 #ifndef ROGUETEST_CHARTEXTURE_H
 #define ROGUETEST_CHARTEXTURE_H
 
-#include <ncurses/curses.h>
+#include <curses.h>
 
 struct CharTexture {
     CharTexture(chtype texture, int caps) : texture(texture), caps(caps) {}

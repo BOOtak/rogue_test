@@ -2,7 +2,7 @@
 // Created by k.leyfer on 05.06.2018.
 //
 
-#include <ncurses/curses.h>
+#include <curses.h>
 #include "RenderSystem.h"
 #include "../properties/Position.h"
 

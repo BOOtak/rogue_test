@@ -1,3 +1,8 @@
+include(FindCurses)
+find_package(Curses REQUIRED)
+
+
+
 add_executable(roguetest
         main.cpp
         entities/Player.cpp
@@ -13,4 +18,5 @@ add_executable(roguetest
         systems/RenderSystem.h
         properties/CharTexture.h)
 
-target_link_libraries(roguetest PUBLIC ecs)
+target_include_directories(roguetest PRIVATE ${CURSES_INCLUDE_DIRS})
+target_link_libraries(roguetest PUBLIC ecs ${CURSES_LIBRARIES})
