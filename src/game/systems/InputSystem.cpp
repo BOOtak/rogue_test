@@ -14,6 +14,8 @@ Event<PlayerMoveEvent> *InputSystem::getPlayerControlEvent(InputEvent *inputEven
     auto type = inputMap.find(inputEvent->keyCode);
     if (type != inputMap.end()) {
         return new Event<PlayerMoveEvent>(type->second);
+    } else {
+        return nullptr;
     }
 }
 

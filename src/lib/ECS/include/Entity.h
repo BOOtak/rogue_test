@@ -11,24 +11,32 @@
 
 class Entity {
 private:
-    std::map<int, const BaseProperty*> properties;
+    std::map<int, const BaseProperty *> properties;
 public:
     ~Entity();
 
-    template <class PDC, class ...Args> void addProperty(Args ... args) {
+    template<class PDC, class ...Args>
+    void addProperty(Args ... args) {
         properties.insert(std::make_pair(BaseProperty::getPropertyType<PDC>(), new Property<PDC>(args...)));
     }
 
-    template <class PDC>
-    bool hasProperty() {
-        return properties.find(BaseProperty::getPropertyType<PDC>()) != properties.end();
+    template<class TProperty, class ... Args>
+    bool hasProperties() {
+        bool hasProp = properties.find(BaseProperty::getPropertyType<TProperty>()) != properties.end();
+        if constexpr(sizeof...(Args) > 0) {
+            return hasProp && hasProperties<Args...>();
+        } else {
+            return hasProp;
+        }
     }
 
-    template <class PDC>
-    const Property<PDC>* getProperty() {
+    template<class PDC>
+    const Property<PDC> *getProperty() {
         auto it = properties.find(BaseProperty::getPropertyType<PDC>());
         if (it != properties.end()) {
             return dynamic_cast<const Property<PDC> *>(it->second);
+        } else {
+            return nullptr;
         }
     }
 };

@@ -19,11 +19,11 @@ public:
         return newEntity;
     }
 
-    template<class PDC>
-    std::vector<Entity*> getEntitiesWithProperty() {
-        std::vector<Entity*> targetEntities;
+    template<class ... TProperties>
+    std::vector<Entity *> getEntitiesWithProperties() {
+        std::vector<Entity *> targetEntities;
         for (auto e : entities) {
-            if (e->hasProperty<PDC>()) {
+            if (e->hasProperties<TProperties...>()) {
                 targetEntities.push_back(e);
             }
         }

@@ -13,21 +13,19 @@ void MoveSystem::update() {
 }
 
 void MoveSystem::onPlayerMoveEvent(PlayerMoveEvent *event) {
-    std::vector<Entity *> controllables = getWorld()->getEntityManager()->getEntitiesWithProperty<PlayerControllable>();
+    std::vector<Entity *> controllables = getWorld()->getEntityManager()->getEntitiesWithProperties<PlayerControllable, Position>();
     for (auto c : controllables) {
         // TODO: calculate distance depending on other entity properties (e.g stats, wear etc)
 
         std::pair<int, int> coordsIncrement = getCoordsIncrement(event);
 
-        if (c->hasProperty<Position>()) {
-            auto val = c->getProperty<Position>()->getValue();
-            val->x_ += coordsIncrement.first;
-            val->y_ += coordsIncrement.second;
-        }
+        auto val = c->getProperty<Position>()->getValue();
+        val->x_ += coordsIncrement.first;
+        val->y_ += coordsIncrement.second;
     }
 }
 
-std::pair<int, int> MoveSystem::getCoordsIncrement(PlayerMoveEvent* event) {
+std::pair<int, int> MoveSystem::getCoordsIncrement(PlayerMoveEvent *event) {
     switch (event->direction) {
         // todo: refactor to support more events & collisions
         case MOVE_UP:
