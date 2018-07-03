@@ -9,11 +9,13 @@
 #include <Entity.h>
 #include "../properties/Position.h"
 #include "../properties/CharTexture.h"
+#include "../properties/RigidBody.h"
 
 class Wall : public Entity {
 public:
     Wall(int x, int y) {
         addProperty<Position>(x, y);
+        addProperty<RigidBody>();
         addProperty<CharTexture>(' ', A_REVERSE);
     }
 };

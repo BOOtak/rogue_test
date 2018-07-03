@@ -5,6 +5,8 @@
 #include "PlayerMoveSystem.h"
 #include "../properties/PlayerControllable.h"
 #include "../properties/Position.h"
+#include "../utils/Vector2.h"
+#include "../events/MoveEvent.h"
 
 PlayerMoveSystem::PlayerMoveSystem(World *world) : System(world) {}
 
@@ -17,29 +19,26 @@ void PlayerMoveSystem::onPlayerMoveEvent(PlayerMoveEvent *event) {
     for (auto c : controllables) {
         // TODO: calculate distance depending on other entity properties (e.g stats, wear etc)
 
-        std::pair<int, int> coordsIncrement = getCoordsIncrement(event);
-
-        auto val = c->getProperty<Position>()->getValue();
-        val->x_ += coordsIncrement.first;
-        val->y_ += coordsIncrement.second;
+        Vector2<int> coordsIncrement = getCoordsIncrement(event);
+        getWorld()->getEventBus()->sendEvent<MoveEvent>(c, coordsIncrement);
     }
 }
 
-std::pair<int, int> PlayerMoveSystem::getCoordsIncrement(PlayerMoveEvent *event) {
+Vector2<int> PlayerMoveSystem::getCoordsIncrement(PlayerMoveEvent *event) {
     switch (event->direction) {
-        // todo: refactor to support more events & collisions
+        // todo: refactor to support more events
         case MOVE_UP:
-            return std::make_pair(0, -1);
+            return Vector2<int>(0, -1);
         case MOVE_DOWN:
-            return std::make_pair(0, 1);
+            return Vector2<int>(0, 1);
         case MOVE_LEFT:
-            return std::make_pair(-1, 0);
+            return Vector2<int>(-1, 0);
         case MOVE_RIGHT:
-            return std::make_pair(1, 0);
+            return Vector2<int>(1, 0);
         default:
             // not supported, stay calm
             std::cout << "Move event " << event->direction << " is not supported!" << std::endl;
-            return std::make_pair(0, 0);
+            return Vector2<int>(0, 0);
     }
 }
 

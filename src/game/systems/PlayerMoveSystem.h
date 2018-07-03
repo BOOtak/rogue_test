@@ -8,6 +8,7 @@
 
 #include <System.h>
 #include "../events/PlayerMoveEvent.h"
+#include "../utils/Vector2.h"
 
 class PlayerMoveSystem : public System, public EventListener {
 public:
@@ -25,7 +26,7 @@ public:
     void onPlayerMoveEvent(PlayerMoveEvent *event);
 
 private:
-    std::pair<int, int> getCoordsIncrement(PlayerMoveEvent *event);
+    Vector2<int> getCoordsIncrement(PlayerMoveEvent *event);
 };
 
 

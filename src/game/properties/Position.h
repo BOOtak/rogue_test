@@ -5,10 +5,12 @@
 #ifndef ROUGETEST_POSITION_H
 #define ROUGETEST_POSITION_H
 
-struct Position {
-    Position(int x, int y) : x_(x), y_(y) {}
+#include "../utils/Vector2.h"
 
-    int x_, y_;
+struct Position {
+    Position(int x, int y) : position_(x, y) {}
+
+    Vector2<int> position_;
 };
 
 #endif //ROUGETEST_POSITION_H

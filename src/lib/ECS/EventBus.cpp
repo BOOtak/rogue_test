@@ -7,7 +7,7 @@
 
 void EventBus::update() {
     // Protect from invoke() { sendEvent(); } loop.
-    unsigned long queueSize = eventQueue.size();
+    unsigned long long int queueSize = eventQueue.size();
 
     for (int i = 0; i < queueSize; ++i) {
         BaseEvent *event = eventQueue.front();

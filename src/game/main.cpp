@@ -9,10 +9,11 @@
 #include "entities/Player.h"
 #include "entities/Mob.h"
 #include "systems/InputSystem.h"
-#include "systems/MoveSystem.h"
+#include "systems/PlayerMoveSystem.h"
 #include "systems/RenderSystem.h"
 #include "systems/CursesRawInputSystem.h"
 #include "entities/Wall.h"
+#include "systems/MoveSystem.h"
 
 const int FPS = 60;
 
@@ -25,13 +26,20 @@ int main() {
     auto em = world->getEntityManager();
 
     auto *player = em->createEntity<Player>(12, 3);
-    em->createEntity<Mob>(10, 20);
+
+    em->createEntity<Wall>(10, 5);
+    em->createEntity<Wall>(10, 6);
+    em->createEntity<Wall>(10, 7);
+    em->createEntity<Wall>(10, 8);
 
     auto *is = world->addSystem<InputSystem>();
     world->getEventBus()->registerListener<InputEvent, InputSystem>(is, &InputSystem::onInputEvent);
 
+    auto *pMs = world->addSystem<PlayerMoveSystem>();
+    world->getEventBus()->registerListener<PlayerMoveEvent, PlayerMoveSystem>(pMs, &PlayerMoveSystem::onPlayerMoveEvent);
+
     auto *ms = world->addSystem<MoveSystem>();
-    world->getEventBus()->registerListener<PlayerMoveEvent, MoveSystem>(ms, &MoveSystem::onPlayerMoveEvent);
+    world->getEventBus()->registerListener<MoveEvent, MoveSystem>(ms, &MoveSystem::onMoveEvent);
 
     world->addSystem<RenderSystem>();
     world->addSystem<CursesRawInputSystem>();

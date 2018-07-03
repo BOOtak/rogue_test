@@ -17,10 +17,10 @@ void RenderSystem::update() {
     int width, height;
     getmaxyx(stdscr, height, width);
     for (auto e : entities) {
-        auto position = e->getProperty<Position>()->getValue();
+        auto position = e->getProperty<Position>()->getValue()->position_;
         auto texture = e->getProperty<CharTexture>()->getValue();
-        if (position->x_ < width && position->y_ < height) {
-            draw(position->x_, position->y_, texture);
+        if (position.x < width && position.y < height) {
+            draw(position.x, position.y, texture);
         } else {
             // TODO: add logging already, will ya?
         }
