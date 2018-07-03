@@ -43,7 +43,7 @@ void RenderSystem::finalize() {
 }
 
 void RenderSystem::draw(int x, int y, CharTexture *texture) {
-    mvaddch(y, x, texture->texture);
+    mvaddch(y, x, texture->texture | texture->caps);
 }
 
 void RenderSystem::blankFill() {

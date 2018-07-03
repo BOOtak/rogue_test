@@ -12,6 +12,7 @@
 #include "systems/MoveSystem.h"
 #include "systems/RenderSystem.h"
 #include "systems/CursesRawInputSystem.h"
+#include "entities/Wall.h"
 
 const int FPS = 60;
 
