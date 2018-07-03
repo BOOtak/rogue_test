@@ -2,17 +2,17 @@
 // Created by kirill on 02.06.18.
 //
 
-#include "MoveSystem.h"
+#include "PlayerMoveSystem.h"
 #include "../properties/PlayerControllable.h"
 #include "../properties/Position.h"
 
-MoveSystem::MoveSystem(World *world) : System(world) {}
+PlayerMoveSystem::PlayerMoveSystem(World *world) : System(world) {}
 
-void MoveSystem::update() {
+void PlayerMoveSystem::update() {
 
 }
 
-void MoveSystem::onPlayerMoveEvent(PlayerMoveEvent *event) {
+void PlayerMoveSystem::onPlayerMoveEvent(PlayerMoveEvent *event) {
     std::vector<Entity *> controllables = getWorld()->getEntityManager()->getEntitiesWithProperties<PlayerControllable, Position>();
     for (auto c : controllables) {
         // TODO: calculate distance depending on other entity properties (e.g stats, wear etc)
@@ -25,7 +25,7 @@ void MoveSystem::onPlayerMoveEvent(PlayerMoveEvent *event) {
     }
 }
 
-std::pair<int, int> MoveSystem::getCoordsIncrement(PlayerMoveEvent *event) {
+std::pair<int, int> PlayerMoveSystem::getCoordsIncrement(PlayerMoveEvent *event) {
     switch (event->direction) {
         // todo: refactor to support more events & collisions
         case MOVE_UP:
@@ -43,10 +43,10 @@ std::pair<int, int> MoveSystem::getCoordsIncrement(PlayerMoveEvent *event) {
     }
 }
 
-void MoveSystem::prepare() {
+void PlayerMoveSystem::prepare() {
 
 }
 
-void MoveSystem::finalize() {
+void PlayerMoveSystem::finalize() {
 
 }

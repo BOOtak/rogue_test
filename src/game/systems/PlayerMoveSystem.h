@@ -9,9 +9,9 @@
 #include <System.h>
 #include "../events/PlayerMoveEvent.h"
 
-class MoveSystem : public System, public EventListener {
+class PlayerMoveSystem : public System, public EventListener {
 public:
-    explicit MoveSystem(World *world);
+    explicit PlayerMoveSystem(World *world);
 
 protected:
     void prepare() override;

@@ -10,8 +10,8 @@ add_executable(roguetest
         systems/InputSystem.h
         events/InputEvent.h
         events/PlayerMoveEvent.h
-        systems/MoveSystem.cpp
-        systems/MoveSystem.h
+        systems/PlayerMoveSystem.cpp
+        systems/PlayerMoveSystem.h
         systems/RenderSystem.cpp
         systems/RenderSystem.h
         properties/CharTexture.h
