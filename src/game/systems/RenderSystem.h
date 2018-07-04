@@ -23,7 +23,7 @@ protected:
 private:
     void draw(int x, int y, CharTexture *texture);
 
-    void blankFill();
+    void blankFill(int maxWidth, int maxHeight);
 };
 
 

@@ -12,10 +12,11 @@
 RenderSystem::RenderSystem(World *world) : System(world) {}
 
 void RenderSystem::update() {
-    blankFill();
     auto entities = getWorld()->getEntityManager()->getEntitiesWithProperties<CharTexture, Position>();
     int width, height;
     getmaxyx(stdscr, height, width);
+    blankFill(width, height);
+
     for (auto e : entities) {
         auto position = e->getProperty<Position>()->getValue()->position_;
         auto texture = e->getProperty<CharTexture>()->getValue();
@@ -46,15 +47,13 @@ void RenderSystem::draw(int x, int y, CharTexture *texture) {
     mvaddch(y, x, texture->texture | texture->caps);
 }
 
-void RenderSystem::blankFill() {
-    int width, height;
-    getmaxyx(stdscr, height, width);
-    for (int x = 0; x < width; ++x) {
-        for (int y = 0; y < height; ++y) {
+void RenderSystem::blankFill(int maxWidth, int maxHeight) {
+    for (int x = 0; x < maxWidth; ++x) {
+        for (int y = 0; y < maxHeight; ++y) {
             mvaddch(y, x, '.');
         }
     }
     std::stringstream dimens;
-    dimens << "(" << width << ";" << height << ")";
+    dimens << "(" << maxWidth << ";" << maxHeight << ")";
     mvaddstr(0, 0, dimens.str().c_str());
 }
