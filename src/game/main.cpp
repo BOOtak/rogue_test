@@ -14,9 +14,13 @@
 #include "systems/CursesRawInputSystem.h"
 #include "entities/Wall.h"
 #include "systems/MoveSystem.h"
+#include "systems/CameraSystem.h"
+#include "entities/Camera.h"
 
 const int FPS = 60;
 
+const int DEFAULT_PADDING_X = 6;
+const int DEFAULT_PADDING_Y = 4;
 using clk = std::chrono::high_resolution_clock;
 
 int main() {
@@ -32,6 +36,8 @@ int main() {
     em->createEntity<Wall>(10, 7);
     em->createEntity<Wall>(10, 8);
 
+    em->createEntity<Camera>(12, 3, DEFAULT_PADDING_X, DEFAULT_PADDING_Y, player);
+
     auto *is = world->addSystem<InputSystem>();
     world->getEventBus()->registerListener<InputEvent, InputSystem>(is, &InputSystem::onInputEvent);
 
@@ -41,6 +47,7 @@ int main() {
     auto *ms = world->addSystem<MoveSystem>();
     world->getEventBus()->registerListener<MoveEvent, MoveSystem>(ms, &MoveSystem::onMoveEvent);
 
+    world->addSystem<CameraSystem>();
     world->addSystem<RenderSystem>();
     world->addSystem<CursesRawInputSystem>();
 

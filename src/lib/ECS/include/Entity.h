@@ -31,7 +31,7 @@ public:
     }
 
     template<class PDC>
-    const Property<PDC> *getProperty() {
+    const Property<PDC> *getProperty() const {
         auto it = properties.find(BaseProperty::getPropertyType<PDC>());
         if (it != properties.end()) {
             return dynamic_cast<const Property<PDC> *>(it->second);

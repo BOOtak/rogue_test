@@ -6,6 +6,7 @@
 #include <sstream>
 #include "RenderSystem.h"
 #include "../properties/Position.h"
+#include "../properties/Focus.h"
 
 #define CURSOR_INVISIBLE 0
 
@@ -17,8 +18,21 @@ void RenderSystem::update() {
     getmaxyx(stdscr, height, width);
     blankFill(width, height);
 
+    std::vector<Entity *> cameras = getWorld()->getEntityManager()->getEntitiesWithProperties<Position, Focus>();
+    if (cameras.size() > 1) {
+        //TODO: I'll add proper logging. Eventually.
+        std::cout << "More than one camera is found! Seems like not okay." << std::endl;
+    } else if (cameras.empty()) {
+        std::cout << "No cameras found, refuse to render!" << std::endl;
+        return;
+    }
+
+    auto &mainCam = cameras.at(0);
+    auto &camPos = mainCam->getProperty<Position>()->getValue()->position_;
+    auto centerPos = Vector2<int>(width, height) / 2;
+
     for (auto e : entities) {
-        auto position = e->getProperty<Position>()->getValue()->position_;
+        auto position = e->getProperty<Position>()->getValue()->position_ - camPos + centerPos;
         auto texture = e->getProperty<CharTexture>()->getValue();
         if (position.x < width && position.y < height) {
             draw(position.x, position.y, texture);

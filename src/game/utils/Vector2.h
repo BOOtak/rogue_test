@@ -17,6 +17,14 @@ public:
         return Vector2<int>(x + other.x, y + other.y);
     }
 
+    Vector2<T> operator-(const Vector2<T> &other) {
+        return Vector2<int>(x - other.x, y - other.y);
+    }
+
+    Vector2<T> operator/(int scalar) {
+        return Vector2<int>(x / scalar, y  / scalar);
+    }
+
     bool operator==(const Vector2 &other) const {
         return x == other.x &&
                y == other.y;
