@@ -20,9 +20,7 @@ public:
 
     template<class T, class ... Args>
     T *addSystem(Args... args) {
-        T *system = new T(this, args...);
-        // Work-around forward declaration (we have no clue about System methods at this point).
-        prepareSystem(system);
+        auto *system = new T(this, args...);
         systems.push_back(system);
         return system;
     }
@@ -30,6 +28,8 @@ public:
     EntityManager *getEntityManager() const;
 
     EventBus *getEventBus() const;
+
+    void prepare();
 
     void update();
 
@@ -39,8 +39,6 @@ private:
     EventBus *eventBus;
 
     std::vector<System *> systems;
-
-    void prepareSystem(System *system);
 };
 
 #endif //ROUGETEST_WORLD_H

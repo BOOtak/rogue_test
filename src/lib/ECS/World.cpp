@@ -2,6 +2,8 @@
 // Created by kirill on 31.05.18.
 //
 
+#include <World.h>
+
 #include "System.h"
 #include "World.h"
 
@@ -35,6 +37,8 @@ void World::update() {
     }
 }
 
-void World::prepareSystem(System *system) {
-    system->prepare();
+void World::prepare() {
+    for (auto &system : systems) {
+        system->prepare();
+    }
 }

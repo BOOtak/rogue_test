@@ -44,6 +44,8 @@ int main() {
     world->addSystem<RenderSystem>();
     world->addSystem<CursesRawInputSystem>();
 
+    world->prepare();
+
     bool shouldStop = false;
     while (!shouldStop) {
         auto time_start = clk::now();
