@@ -32,3 +32,4 @@ add_executable(roguetest
 
 target_include_directories(roguetest PRIVATE ${CURSES_INCLUDE_DIRS})
 target_link_libraries(roguetest PUBLIC ecs ${CURSES_LIBRARIES})
+target_link_libraries(roguetest PUBLIC spdlog::spdlog)

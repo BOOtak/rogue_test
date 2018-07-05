@@ -17,6 +17,8 @@
 #include "systems/CameraSystem.h"
 #include "entities/Camera.h"
 
+#include <spdlog/spdlog.h>
+
 const int FPS = 60;
 
 const int DEFAULT_PADDING_X = 6;
@@ -24,6 +26,9 @@ const int DEFAULT_PADDING_Y = 4;
 using clk = std::chrono::high_resolution_clock;
 
 int main() {
+
+    auto root_logger = spdlog::basic_logger_mt("root logger", "log.log");
+
     const std::chrono::microseconds sleepInterval(1000 * 1000 / FPS);
 
     std::unique_ptr<World> world(new World());
@@ -51,7 +56,9 @@ int main() {
     world->addSystem<RenderSystem>();
     world->addSystem<CursesRawInputSystem>();
 
+    root_logger->info("World prepare...");
     world->prepare();
+    root_logger->info("World prepare... Done!");
 
     bool shouldStop = false;
     while (!shouldStop) {
