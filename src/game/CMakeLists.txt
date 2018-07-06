@@ -26,6 +26,9 @@ add_executable(roguetest
         systems/PlayerMoveSystem.h
         systems/RenderSystem.cpp
         systems/RenderSystem.h
+        utils/logging.h
+        utils/LogWrapper.cpp
+        utils/LogWrapper.h
         utils/Vector2.cpp
         utils/Vector2.h
         )

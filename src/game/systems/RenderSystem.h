@@ -8,8 +8,10 @@
 
 #include <System.h>
 #include "../properties/CharTexture.h"
+#include "../utils/logging.h"
 
 class RenderSystem : public System {
+    INIT_LOGGER("RenderSystem");
 public:
     RenderSystem(World *world);
 

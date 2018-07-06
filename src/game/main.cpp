@@ -1,4 +1,3 @@
-#include <iostream>
 #include <bits/unique_ptr.h>
 #include <World.h>
 #include <assert.h>
@@ -16,6 +15,7 @@
 #include "systems/MoveSystem.h"
 #include "systems/CameraSystem.h"
 #include "entities/Camera.h"
+#include "utils/logging.h"
 
 #include <spdlog/spdlog.h>
 
@@ -26,8 +26,7 @@ const int DEFAULT_PADDING_Y = 4;
 using clk = std::chrono::high_resolution_clock;
 
 int main() {
-
-    auto root_logger = spdlog::basic_logger_mt("root logger", "log.log");
+    INIT_LOGGER("root");
 
     const std::chrono::microseconds sleepInterval(1000 * 1000 / FPS);
 
@@ -56,9 +55,9 @@ int main() {
     world->addSystem<RenderSystem>();
     world->addSystem<CursesRawInputSystem>();
 
-    root_logger->info("World prepare...");
+    LOG_INFO("World prepare...");
     world->prepare();
-    root_logger->info("World prepare... Done!");
+    LOG_INFO("World prepare... Done!");
 
     bool shouldStop = false;
     while (!shouldStop) {

@@ -7,6 +7,7 @@
 #include "../properties/Position.h"
 #include "../utils/Vector2.h"
 #include "../events/MoveEvent.h"
+#include "../utils/logging.h"
 
 PlayerMoveSystem::PlayerMoveSystem(World *world) : System(world) {}
 
@@ -37,7 +38,7 @@ Vector2<int> PlayerMoveSystem::getCoordsIncrement(PlayerMoveEvent *event) {
             return Vector2<int>(1, 0);
         default:
             // not supported, stay calm
-            std::cout << "Move event " << event->direction << " is not supported!" << std::endl;
+            LOG_WARN("Move event {} is not supported!", event->direction);
             return Vector2<int>(0, 0);
     }
 }

@@ -31,17 +31,12 @@ public:
     void unregisterListener(TListener *listener) {
         EventType type = BaseEvent::getEventType<TEvent>();
         if (listenerMap.find(type) == listenerMap.end()) {
-            std::cout << "no listener of type " << type << std::endl;
             return;
         }
 
         auto &delegatesOfType = listenerMap.at(type);
         auto newDelegates = std::remove_if(delegatesOfType.begin(), delegatesOfType.end(), [&](BaseEventDelegate *delegate) -> bool {
-            bool res = delegate->getListener() == listener;
-            if (res) {
-                std::cout << "Unregister listener of type " << type << std::endl;
-            }
-            return res;
+            return (delegate->getListener() == listener);
         });
         delegatesOfType.resize(static_cast<unsigned long>(newDelegates - delegatesOfType.begin()));
     }

@@ -20,10 +20,9 @@ void RenderSystem::update() {
 
     std::vector<Entity *> cameras = getWorld()->getEntityManager()->getEntitiesWithProperties<Position, Focus>();
     if (cameras.size() > 1) {
-        //TODO: I'll add proper logging. Eventually.
-        std::cout << "More than one camera is found! Seems like not okay." << std::endl;
+        LOG_WARN("More than one camera is found! Seems like not okay.");
     } else if (cameras.empty()) {
-        std::cout << "No cameras found, refuse to render!" << std::endl;
+        LOG_WARN("No cameras found, refuse to render!");
         return;
     }
 
@@ -36,15 +35,13 @@ void RenderSystem::update() {
         auto texture = e->getProperty<CharTexture>()->getValue();
         if (position.x < width && position.y < height) {
             draw(position.x, position.y, texture);
-        } else {
-            // TODO: add logging already, will ya?
         }
     }
     refresh();
 }
 
 void RenderSystem::prepare() {
-    std::cout << "RenderSystem::prepare()" << std::endl;
+    LOG_DEBUG("RenderSystem::prepare()");
     initscr();
     curs_set(CURSOR_INVISIBLE);
     cbreak();
@@ -53,7 +50,7 @@ void RenderSystem::prepare() {
 }
 
 void RenderSystem::finalize() {
-    std::cout << "RenderSystem::finalize()" << std::endl;
+    LOG_DEBUG("RenderSystem::finalize()");
     endwin();
 }
 

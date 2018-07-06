@@ -7,7 +7,6 @@
 
 
 #include <vector>
-#include <iostream>
 #include "Entity.h"
 
 class EntityManager {
